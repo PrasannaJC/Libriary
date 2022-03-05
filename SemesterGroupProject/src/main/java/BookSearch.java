@@ -28,12 +28,14 @@ public class BookSearch extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String keyTitle = request.getParameter("bookTitle"); //label it as whatever is designated in the HTML
+		String keyTitle = request.getParameter("booktitle"); //label it as whatever is designated in the HTML
 		String keyAuthor = request.getParameter("writer"); //label it as whatever is designated in the HTML
 		String keyISBN = request.getParameter("ISBN"); //label it as whatever is designated in the HTML
 		String keyCategory = request.getParameter("category"); //label it as whatever is designated in the HTML
+
 		String keyCopy = request.getParameter("copies"); //label it as whatever is designated in the HTML
 		String keyYear = request.getParameter("date"); //label it as whatever is designated in the HTML
+		
 		try {
 			masterSearch(response, keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear);
 		} catch (SQLException e) {
@@ -70,110 +72,148 @@ public class BookSearch extends HttpServlet {
         
 		String keys[] = {keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear};
 		String keyNames[] = {"TITLE", "AUTHOR", "ISBN13", "CATEGORY", "COPIES", "PublicationYear"};
-		String selectSQL = "Select * FROM BookTable";
-		Boolean test[] = new Boolean[6];
+		String selectSQL = "SELECT * FROM BookTable";
+		Boolean test[] = {false, false, false, false, false, false};
 		
-		for (int k = 0; k < test.length; k++)
-		{
-			test[k] = false;
-		}
+
 		
 		for (int i = 0; i < keys.length; i++)
 		{	
-			if (keys[i] != "" && !keys[i].isEmpty()) // Just check if this is not accidently repeating the same command
+			if (keys[i] != "" || !keys[i].isEmpty()) // Just check if this is not accidently repeating the same command
 			{
 				test[i] = true;
 			}
+			System.out.println(keyNames[i] + " is " + test[i] + " with the input => " + keys[i] + " <=  ");
 		}
 		
-		if (test[4]) // SOME ISSUE HERE!!! GETTING NULL POINTER EXCEPTION
-		{
-			int copyNumb = Integer.parseInt(keyCopy);
-			selectSQL += " Where COPIES >= " + copyNumb;
-		}
-		if (test[5])
-		{
-			int copyYear = Integer.parseInt(keyYear);
-			selectSQL += " Where PublicationYear = " + copyYear;
-		}
 		
+		/** ORIGINAL
 		for (int j = 0; j < 4; j++)
 		{
 			if (test[j])
 			{
-				selectSQL += " WHERE" + keyNames[j] + "LIKE ?";
+				selectSQL += " WHERE " + keyNames[j] + " LIKE ?";
+				//keys[j] += "%";
+
+				if (test[j+1] && j < 4)
+				{
+					selectSQL += " AND";
+				}
 			}
 		}
-		/*
-		if (!test[0] && !test[1] && !test[2] && !test[3] && !test[4] && !test[5])
+		*/
+		
+		
+		for (int j = 0; j < test.length; j++)
 		{
-			selectSQL = "Select * FROM BookTable";
+			if (test[j] && j < 4)
+			{
+				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
+				{
+					selectSQL += " AND";
+				}
+				
+				selectSQL += " WHERE " + keyNames[j] + " LIKE ?";
+				//keys[j] += "%";
+
+				
+				/*
+				if (test[j+1] && j < 4)
+				{
+					if (test[j - 1])
+					{
+						selectSQL += " AND";
+					}
+					
+					
+				}
+				*/
+				
+			}
+			else if (test[j] && j == 4)
+			{
+				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
+				{
+					selectSQL += " AND";
+				}
+				
+				selectSQL += " WHERE " + keyNames[4] + " >= ?";
+				
+				
+			}
+			else if (test[j] && j == 5)
+			{
+				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
+				{
+					selectSQL += " AND";
+				}
+				
+				selectSQL += " WHERE " + keyNames[5] + " = ?";
+			}
+			
 		}
-        */
+	
+		/**
+		if (test[4]) // SOME ISSUE HERE!!! GETTING NULL POINTER EXCEPTION
+		{
+			selectSQL += " WHERE " + keyNames[4] + " >= ?";// + copyNumb;
+		}
+		if (test[5])
+		{
+			
+			
+			selectSQL += " WHERE " + keyNames[5] + " = ?";// + copyYear;
+		}
+		*/
+
+
+		System.out.println("This is the selectSQL statement => " + selectSQL);
+		
 		response.setContentType("text/html");
+		
 		preparedStatement = connection.prepareStatement(selectSQL);
+		int q = 1;
+		String temp;
+		for (int p = 0; p < test.length; p++)
+		{
+			if (test[p])
+			{
+				temp = keys[p] + "%";
+				
+				preparedStatement.setString(q, temp);
+				q++;
+			}
+		}
 		ResultSet rs = preparedStatement.executeQuery();
 
 		
 		while (rs.next()) {
-            String titleTemp = rs.getString("booktitle").trim();
-            String authorTemp = rs.getString("writer").trim();
-            String bookNumb = rs.getString("ISBN").trim();
-            String group = rs.getString("category").trim();
-            int count = rs.getInt("copies");
-            int year = rs.getInt("date");
+            String titleTemp = rs.getString("TITLE").trim();
+            String authorTemp = rs.getString("AUTHOR").trim();
+            String bookNumb = rs.getString("ISBN13").trim();
+            String group = rs.getString("CATEGORY").trim();
+            
+            int count = rs.getInt("COPIES");
+            int year = rs.getInt("PublicationYear");
+            
 
             out.println("Book Title: " + titleTemp + ", ");
 	        out.println("Author: " + authorTemp + ", ");
 	        out.println("ISBN 13: " + bookNumb + ", ");
 	        out.println("Category: " + group + ", ");
+	        
 	        out.println("Copies: " + count + ", ");
 	        out.println("Year Published: " + year + "<br>");
+	        
 		}
-		out.println("<a href=/SemesterGroupProject/BookSearch.html>Search Data</a> <br>");
+		out.println("<a href=/SemesterGroupProject/Book_Search.html>Search Data</a> <br>");
         out.println("</body></html>");
         rs.close();
         preparedStatement.close();
         connection.close();
 	}
 	
-	/*
-	void titleSearch()
-	{
-		
-	}
 	
-	void authorSearch()
-	{
-		
-	}
-	
-	void ISBNsearch()
-	{
-		
-	}
-	
-	void categorySearch()
-	{
-		
-	}
-	
-	//searches based on if there are more than a set number of copies of a book available. 
-	void copySearch()
-	{
-		
-	}
-	
-	// filters out books by the matching year
-	// maybe set it up as a drop down where a user can search based on a certain year 
-	// (keep it within a range of say forty or fifty years)
-	 
-	void yearSearch()
-	{
-		
-	}
-
-	*/
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
