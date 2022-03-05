@@ -65,10 +65,18 @@ public class BookSearch extends HttpServlet {
               "<body bgcolor=\"#f0f0f0\">\n" + //
               "<h1 align=\"center\">" + title + "</h1>\n");
         
+        DBconnecter.getDBConnection(getServletContext());
+        connection = DBconnecter.connection;
+        
 		String keys[] = {keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear};
 		String keyNames[] = {"TITLE", "AUTHOR", "ISBN13", "CATEGORY", "COPIES", "PublicationYear"};
 		String selectSQL = "Select * FROM BookTable";
 		Boolean test[] = new Boolean[6];
+		
+		for (int k = 0; k < test.length; k++)
+		{
+			test[k] = false;
+		}
 		
 		for (int i = 0; i < keys.length; i++)
 		{	
