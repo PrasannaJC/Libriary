@@ -78,7 +78,7 @@ public class BookSearch extends HttpServlet {
 			}
 		}
 		
-		if (test[4])
+		if (test[4]) // SOME ISSUE HERE!!! GETTING NULL POINTER EXCEPTION
 		{
 			int copyNumb = Integer.parseInt(keyCopy);
 			selectSQL += " Where COPIES >= " + copyNumb;
@@ -96,12 +96,12 @@ public class BookSearch extends HttpServlet {
 				selectSQL += " WHERE" + keyNames[j] + "LIKE ?";
 			}
 		}
-		
+		/*
 		if (!test[0] && !test[1] && !test[2] && !test[3] && !test[4] && !test[5])
 		{
 			selectSQL = "Select * FROM BookTable";
 		}
-        
+        */
 		response.setContentType("text/html");
 		preparedStatement = connection.prepareStatement(selectSQL);
 		ResultSet rs = preparedStatement.executeQuery();
