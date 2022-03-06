@@ -83,26 +83,10 @@ public class BookSearch extends HttpServlet {
 			{
 				test[i] = true;
 			}
-			System.out.println(keyNames[i] + " is " + test[i] + " with the input => " + keys[i] + " <=  ");
+			//System.out.println(keyNames[i] + " is " + test[i] + " with the input => " + keys[i] + " <=  ");
 		}
 		
-		
-		/** ORIGINAL
-		for (int j = 0; j < 4; j++)
-		{
-			if (test[j])
-			{
-				selectSQL += " WHERE " + keyNames[j] + " LIKE ?";
-				//keys[j] += "%";
 
-				if (test[j+1] && j < 4)
-				{
-					selectSQL += " AND";
-				}
-			}
-		}
-		*/
-		
 		
 		for (int j = 0; j < test.length; j++)
 		{
@@ -110,34 +94,29 @@ public class BookSearch extends HttpServlet {
 			{
 				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
 				{
-					selectSQL += " AND";
+					selectSQL += " AND ";
 				}
-				
-				selectSQL += " WHERE " + keyNames[j] + " LIKE ?";
-				//keys[j] += "%";
-
-				
-				/*
-				if (test[j+1] && j < 4)
+				else
 				{
-					if (test[j - 1])
-					{
-						selectSQL += " AND";
-					}
-					
-					
+					selectSQL += " WHERE ";
 				}
-				*/
+				
+				selectSQL += keyNames[j] + " LIKE ?";
+				
 				
 			}
 			else if (test[j] && j == 4)
 			{
 				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
 				{
-					selectSQL += " AND";
+					selectSQL += " AND ";
+				}
+				else
+				{
+					selectSQL += " WHERE ";
 				}
 				
-				selectSQL += " WHERE " + keyNames[4] + " >= ?";
+				selectSQL += keyNames[4] + " >= ?";
 				
 				
 			}
@@ -145,29 +124,20 @@ public class BookSearch extends HttpServlet {
 			{
 				if (String.valueOf(selectSQL.charAt(selectSQL.length() - 1)).equals("?"))
 				{
-					selectSQL += " AND";
+					selectSQL += " AND ";
+				}
+				else
+				{
+					selectSQL += " WHERE ";
 				}
 				
-				selectSQL += " WHERE " + keyNames[5] + " = ?";
+				selectSQL += keyNames[5] + " = ?";
 			}
 			
 		}
 	
-		/**
-		if (test[4]) // SOME ISSUE HERE!!! GETTING NULL POINTER EXCEPTION
-		{
-			selectSQL += " WHERE " + keyNames[4] + " >= ?";// + copyNumb;
-		}
-		if (test[5])
-		{
-			
-			
-			selectSQL += " WHERE " + keyNames[5] + " = ?";// + copyYear;
-		}
-		*/
 
-
-		System.out.println("This is the selectSQL statement => " + selectSQL);
+		//System.out.println("This is the selectSQL statement => " + selectSQL);
 		
 		response.setContentType("text/html");
 		
@@ -179,13 +149,13 @@ public class BookSearch extends HttpServlet {
 			if (test[p])
 			{
 				temp = keys[p] + "%";
-				System.out.println("Temp is -> " + temp + " and p is -> " + p + " and q is -> " + q);
+				//System.out.println("Temp is -> " + temp + " and p is -> " + p + " and q is -> " + q);
 				preparedStatement.setString(q, temp);
 				q++;
 			}
 		}
 		
-		System.out.println("This is the selectSQL statement for the second time => " + selectSQL);
+		//System.out.println("This is the selectSQL statement for the second time => " + selectSQL);
 		ResultSet rs = preparedStatement.executeQuery();
 
 		
