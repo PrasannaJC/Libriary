@@ -179,13 +179,16 @@ public class BookSearch extends HttpServlet {
 			if (test[p])
 			{
 				temp = keys[p] + "%";
-				
+				System.out.println("Temp is -> " + temp + " and p is -> " + p + " and q is -> " + q);
 				preparedStatement.setString(q, temp);
 				q++;
 			}
 		}
+		
+		System.out.println("This is the selectSQL statement for the second time => " + selectSQL);
 		ResultSet rs = preparedStatement.executeQuery();
 
+		
 		
 		while (rs.next()) {
             String titleTemp = rs.getString("TITLE").trim();
@@ -194,6 +197,7 @@ public class BookSearch extends HttpServlet {
             String group = rs.getString("CATEGORY").trim();
             
             int count = rs.getInt("COPIES");
+            String describe = rs.getString("DESCRIPTION");
             int year = rs.getInt("PublicationYear");
             
 
@@ -203,6 +207,7 @@ public class BookSearch extends HttpServlet {
 	        out.println("Category: " + group + ", ");
 	        
 	        out.println("Copies: " + count + ", ");
+	        out.println("Description: " + describe + ", ");
 	        out.println("Year Published: " + year + "<br>");
 	        
 		}
