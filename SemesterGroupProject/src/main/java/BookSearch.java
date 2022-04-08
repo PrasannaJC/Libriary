@@ -150,6 +150,7 @@ public class BookSearch extends HttpServlet {
 			{
 				temp = keys[p] + "%";
 				//System.out.println("Temp is -> " + temp + " and p is -> " + p + " and q is -> " + q);
+				
 				preparedStatement.setString(q, temp);
 				q++;
 			}
@@ -170,7 +171,7 @@ public class BookSearch extends HttpServlet {
             String describe = rs.getString("DESCRIPTION");
             int year = rs.getInt("PublicationYear");
             
-
+            
             out.println("Book Title: " + titleTemp + ", ");
 	        out.println("Author: " + authorTemp + ", ");
 	        out.println("ISBN 13: " + bookNumb + ", ");
