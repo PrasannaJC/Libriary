@@ -5,30 +5,70 @@
 header
 {
 	background-color:#101010;
-	color:#b53535;
+	border: 2px solid #b5a965;
+    color:#b5a965;
 	text-align:center;
 	padding:5px;
 }
 
 section
 {
-	background-color:#bababa;
+	background-color:#451919;
 	width:100%;
 	min-width:350px;
 	max-width:1920px;
 	height:100%;
 	min-height:200px;
-	max-height:1080px;
+	max-height:800px;
     float:left;
 }
 
 footer
 {
 	background-color:#101010;
-    color:#b53535;
+    border: 2px solid #b5a965;
+    color:#b5a965;
     clear:both;
     text-align:center;
     padding:5px;
+}
+.outerBox
+{
+	border: 2px solid #b5a965;
+	
+	width: 285px;
+  	float: center;
+  	
+  	margin: auto;
+}
+/*A div for containing rows of search options to be placed in the center of the background*/
+.loginRow
+{
+  	background-color: black;
+	color: #b5a965;
+  	border: 2px solid black;
+  	
+  	text-align: right;
+  	
+  	width: 250px;
+  	float: center;
+  	
+  	margin: auto;
+ 	padding: 15px;
+}
+/*A div for centering the submit buttion within the background (just below search options)*/
+.loginSubmit
+{
+	background-color: black;
+	border: 2px solid black;
+  	
+  	text-align: center;
+  	
+  	width: 250px;
+  	float: center;
+  	
+  	margin: auto;
+  	padding: 15px;
 }
 </style>
 </head>
@@ -36,28 +76,41 @@ footer
 <body>
 
 <header>
-<h1> Library Management </h1>
+<h1> Library Management Log In Page </h1>
 </header>
 
 <section>
 	
-	<h1 style="color:#101010;font-size:100%;font-size:3.75vh; ;text-align:center;">
+	<h1 style="color:#b5a965;font-size:100%;font-size:3.75vh; ;text-align:center;">
 	Welcome to the library management system!<br>
-	You must enter your branch name and pin<br>
+	You must enter your branch name and pin code<br>
 	to proceed into the system.
 	</h1>
 	
-	<form style="text-align:center; font-size:3.75vh" action="Name of Login Class" method="POST">
-		Branch Name: <input style="font-size:3.5vh" type="text" name="branchName"> <br />
-		Pin Number: <input style="font-size:3.5vh" type="text" name="pinCode"> <br />
-		<input style="font-size:3.5vh" type="submit" value="Sign In" />
+	<form action="LibrarianLogin" method="POST">
+		
+		<div class="outerBox">
+			<div class="loginRow">
+			<label for="branchLabel">Branch Name: </label>
+			<input id="branchLabel" type="text" name="branchName">
+			</div>
+			
+			<div class="loginRow">
+			<label for="pinLabel">Pin Code: </label>
+			<input id="pinLabel" type="text" name="pinCode">
+			</div>
+			
+			<div class="loginSubmit">
+			<input type="submit" value="Sign In" />
+			</div>
+		</div>
 	</form>
 	
 	
 </section>
 
 <footer>
-The Librarians 2022
+Copyright 2022, The Librarians
 </footer>
 
 </body>
