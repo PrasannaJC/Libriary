@@ -41,7 +41,7 @@ public class LibrarianLogin extends HttpServlet {
 	         connection = DBconnecter.connection;
 	         
 	         if(!keyBranch.isEmpty() && !keyPin.isEmpty()) {
-	        	 String selectSQL = "SELECT * FROM  LibrarianLogin WHERE BRANCH LIKE ? AND PIN LIKE ?";
+	        	 String selectSQL = "SELECT * FROM  LibrarianTable WHERE BRANCH LIKE ? AND PIN LIKE ?";
 		            String branch = keyBranch + "%";
 		            String pin = keyPin + "%";
 		            preparedStatement = connection.prepareStatement(selectSQL);
