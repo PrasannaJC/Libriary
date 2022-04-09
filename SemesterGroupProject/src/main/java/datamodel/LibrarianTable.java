@@ -8,7 +8,7 @@
 	import javax.persistence.Table;
 	/**
 	 * @since J2SE-1.8
-	 CREATE TABLE LibrarianTable (
+	  CREATE TABLE LibrarianTable (
 	  id INT NOT NULL AUTO_INCREMENT,
 	  branch VARCHAR(30) NOT NULL, 
 	  pin VARCHAR(30) NOT NULL,   
@@ -32,9 +32,7 @@ public class LibrarianTable {
 	      this.id = id;
 	      this.branch = branch;
 	      this.pin = pin;
-
 	   }
-
 	   public LibrarianTable(String branch, String pin) {
 		  this.branch = branch; 
 	      this.pin = pin;
