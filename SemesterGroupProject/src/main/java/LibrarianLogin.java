@@ -59,9 +59,10 @@ public class LibrarianLogin extends HttpServlet {
 	       	      PrintWriter out = response.getWriter();
 	       	      out.println("/SemesterGroupProject/Home.html");
 	            }
-	            elif(!branch.contains(keyBranch) or !pin.contains(keyPin)){
+	            else if(!branch.contains(keyBranch) || !pin.contains(keyPin)){
 	            	 PrintWriter out = response.getWriter();
 		       	      out.println("incorrect branch or password");
+		       	      
 	            }
 	         }
 	         
