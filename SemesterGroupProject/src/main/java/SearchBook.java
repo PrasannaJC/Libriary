@@ -36,8 +36,20 @@ public class SearchBook extends HttpServlet {
 		String keyISBN = request.getParameter("ISBN"); //label it as whatever is designated in the HTML
 		String keyCategory = request.getParameter("category"); //label it as whatever is designated in the HTML
 
-		String keyCopy = request.getParameter("copies"); //label it as whatever is designated in the HTML
-		String keyYear = request.getParameter("date"); //label it as whatever is designated in the HTML
+		Integer keyCopy;
+		try { 
+			keyCopy = Integer.valueOf(request.getParameter("copies")); //label it as whatever is designated in the HTML
+		}
+		catch (NumberFormatException e) {
+			keyCopy = null;
+		}
+		Integer keyYear;
+		try {
+			keyYear = Integer.valueOf(request.getParameter("date")); //label it as whatever is designated in the HTML
+		}
+		catch (NumberFormatException e) {
+			keyYear = null;
+		}
 		
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
@@ -51,18 +63,20 @@ public class SearchBook extends HttpServlet {
 	    out.println("<ul>");
 	
 	    List<Book> bkz = null;
-	    if ((keyTitle != null && !keyTitle.isEmpty()) || (keyAuthor != null && !keyAuthor.isEmpty()) || (keyISBN != null && !keyISBN.isEmpty()) 
+	    /**if ((keyTitle != null && !keyTitle.isEmpty()) || (keyAuthor != null && !keyAuthor.isEmpty()) || (keyISBN != null && !keyISBN.isEmpty()) 
 	   		  || (keyCategory != null && !keyCategory.isEmpty()) || (keyCopy != null && !keyCopy.isEmpty()) || (keyYear != null && !keyYear.isEmpty()))
 	    {
-		    bkz = BookUtil.listBooks(keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear);
+	    */
+		bkz = BookUtil.listBooks(keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear);
 	    	//bkz = BookUtil.listBooks();
-	    	out.println("the if part");
+	    /**	out.println("the if part");
 	    }
 	    else
 	    {
 	  	   bkz = BookUtil.listBooks();
 	    	out.println("the else part");
 	    }
+	    */
 	    display(bkz, out);
 	    out.println("</ul>");
 	    out.println("<a href=/" + Info.projectName + "/" + Info.searchWebName + ">Searching for a book...</a> <br>");
