@@ -57,7 +57,7 @@ public class LibrarianLogin extends HttpServlet {
 	            if(branch.contains(keyBranch) && pin.contains(keyPin)){
 	            	 response.setContentType("html");
 	       	      PrintWriter out = response.getWriter();
-	       	      out.println("library/Home.html");
+	       	      out.println("/SemesterGroupProject/Home.html");
 	            }
 	            elif(!branch.contains(keyBranch) or !pin.contains(keyPin)){
 	            	 PrintWriter out = response.getWriter();
