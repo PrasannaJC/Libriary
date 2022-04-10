@@ -1,10 +1,108 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<style>
+header
+{
+	background-color:#101010;
+	border: 2px solid #b5a965;
+    color:#b5a965;
+	text-align:center;
+	padding:5px;
+}
+
+section
+{
+	background-color:#451919;
+	width:100%;
+	min-width:350px;
+	max-width:1920px;
+	height:100%;
+	min-height:200px;
+	max-height:800px;
+    float:left;
+}
+
+footer
+{
+	background-color:#101010;
+    border: 2px solid #b5a965;
+    color:#b5a965;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+.outerBox
+{
+	border: 2px solid #b5a965;
+	
+	width: 285px;
+  	float: center;
+  	
+  	margin: auto;
+}
+/*A div for containing rows of search options to be placed in the center of the background*/
+.homepageRow
+{
+  	background-color: black;
+	color: #b5a965;
+  	border: 2px solid #b5a965;
+  	
+  	text-align: center;
+  	
+  	width: 250px;
+  	float: center;
+  	
+  	margin: auto;
+ 	padding: 15px;
+}
+</style>
 </head>
+
 <body>
+
+<header>
+<h1> Management Home Page </h1>
+</header>
+
+<section>
+	
+	<h1 style="color:#b5a965;font-size:100%;font-size:3.75vh; ;text-align:center;">
+	Welcome to the library management system home page!
+	</h1>
+	
+	<h2 style="color:#b5a965;font-size:100%;font-size:3.25vh; ;text-align:center;">
+	Here, the various functionalities of the<br>
+	library management system may be accessed.<br>
+	Please select a feature below to continue.
+	</h2>
+	
+	<h3 style="color:#b5a965;font-size:100%;font-size:3vh; ;text-align:center;">
+	Search the Library Book System
+	</h3>
+	
+	<div class="homepageRow">
+	<a href="/SemesterGroupProject/Book_Search.html"> Search Books </a> <br>
+	</div>
+	
+	<h3 style="color:#b5a965;font-size:100%;font-size:3vh; ;text-align:center;">
+	Add a New Entry into the Book System
+	</h3>
+	
+	<div class="homepageRow">
+	<a href="/SemesterGroupProject/Book_Insert.html"> Add a Book </a> <br>
+	</div>
+	
+	<h4 style="color:#b5a965;font-size:100%;font-size:1.75vh; ;text-align:center;">
+	**Additional features to be added<br>
+	to the home page soon!**
+	</h4>
+	
+</section>
+
+<footer>
+Copyright 2022, The Librarians
+</footer>
 
 </body>
 </html>
