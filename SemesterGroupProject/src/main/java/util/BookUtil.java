@@ -54,7 +54,7 @@ public class BookUtil {
 	      return resultList;
 	   }
 
-	   public static List<Book> listBooks(String keyTitle, String keyAuthor, String keyISBN, String keyCategory, String keyCopy, String keyYear) {
+	   public static List<Book> listBooks(String keyTitle, String keyAuthor, String keyISBN, String keyCategory, Integer keyCopy, Integer keyYear) {
 		   
 		   List<Book> resultList = new ArrayList<Book>();
 		   Session session = getSessionFactory().openSession();
@@ -68,9 +68,8 @@ public class BookUtil {
 				   System.out.println(" keytitle: " + keyTitle + " , keyauth: " + keyAuthor + " , keyisbn: " + keyISBN + " , keycat: " + keyCategory + " , keycopies: " + keyCopy + " , keyYear: " + keyYear);
 				   if ((keyTitle == null || b.getTitle().startsWith(keyTitle)) && (keyAuthor == null || b.getAuthor().startsWith(keyAuthor)) &&
 		            		(keyISBN == null || b.getISBN13().startsWith(keyISBN)) && (keyCategory == null || b.getCategory().startsWith(keyCategory)) && 
-		            		(keyCopy == null || b.getCopies() == Integer.parseInt(keyCopy)) && (keyYear == null || b.getPublicationYear() == Integer.parseInt(keyYear)))
+		            		(keyCopy == null || b.getCopies() == keyCopy) && (keyYear == null || b.getPublicationYear() == keyYear))
 		            		{
-					   			System.out.println("inside the if");
 					   			resultList.add(b);
 
 		            		}				   
@@ -86,12 +85,12 @@ public class BookUtil {
 	      return resultList;
 	   }
 
-	   public static void createBook(String title, String author, String isbn13, String category, String copies, String description, String publicationyear) {
+	   public static void createBook(String title, String author, String isbn13, String category, Integer copies, String description, Integer publicationyear) {
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try {
 	         tx = session.beginTransaction();
-	         session.save(new Book(title,author,isbn13,category,Integer.valueOf(copies),description,Integer.valueOf(publicationyear)));
+	         session.save(new Book(title,author,isbn13,category,copies,description,publicationyear));
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx != null)
