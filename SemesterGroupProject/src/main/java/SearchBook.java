@@ -63,23 +63,12 @@ public class SearchBook extends HttpServlet {
 	    out.println("<ul>");
 	
 	    List<Book> bkz = null;
-	    /**if ((keyTitle != null && !keyTitle.isEmpty()) || (keyAuthor != null && !keyAuthor.isEmpty()) || (keyISBN != null && !keyISBN.isEmpty()) 
-	   		  || (keyCategory != null && !keyCategory.isEmpty()) || (keyCopy != null && !keyCopy.isEmpty()) || (keyYear != null && !keyYear.isEmpty()))
-	    {
-	    */
+
 		bkz = BookUtil.listBooks(keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear);
-	    	//bkz = BookUtil.listBooks();
-	    /**	out.println("the if part");
-	    }
-	    else
-	    {
-	  	   bkz = BookUtil.listBooks();
-	    	out.println("the else part");
-	    }
-	    */
+
 	    display(bkz, out);
 	    out.println("</ul>");
-	    out.println("<a href=/" + Info.projectName + "/" + Info.searchWebName + ">Searching for a book...</a> <br>");
+	    out.println("<a href=/" + Info.projectName + "/" + Info.searchWebName + ">Search for Another Book</a> <br>");
 	    //out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
 	    out.println("</body></html>");
 			
