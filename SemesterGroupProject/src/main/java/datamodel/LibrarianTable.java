@@ -15,7 +15,7 @@ import javax.persistence.Table;
   PRIMARY KEY (id));
  */
 @Entity
-@Table(name = "LibrarianTable")
+@Table(name = "LibrarianLogin")
 public class LibrarianTable {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
