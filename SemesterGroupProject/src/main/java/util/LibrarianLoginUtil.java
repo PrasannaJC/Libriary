@@ -35,11 +35,11 @@ public class LibrarianLoginUtil {
 
 		   try {
 			   tx = session.beginTransaction();
-			   List<?> LL = session.createQuery("FROM LibrarianLogin").list();
+			   List<?> LL = session.createQuery("FROM LibrarianTable").list();
 			   for (Iterator<?> iterator = LL.iterator(); iterator.hasNext();) {
 				   LibrarianTable L = (LibrarianTable) iterator.next();
 				   if (L.getbranch().startsWith(keyBranch) &&  L.getPin().startsWith(keyPin)) {
-					   			return true;
+					   		return true;
 		           }				   
 			   }
 			   tx.commit();
