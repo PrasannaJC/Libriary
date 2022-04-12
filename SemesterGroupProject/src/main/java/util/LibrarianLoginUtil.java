@@ -52,4 +52,42 @@ public class LibrarianLoginUtil {
 	      }
 	      return false;
 	   }
+	   public static void createlibrarian(String branchName, String pinName) {
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+		      try {
+		         tx = session.beginTransaction();
+		         session.save(new LibrarianTable(branchName, pinName));
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		   }
+	   public static List<LibrarianTable> listLibrarian() {
+		      List<LibrarianTable> resultList = new ArrayList<LibrarianTable>();
+
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+
+		      try {
+		         tx = session.beginTransaction();
+		         List<?> rsvps = session.createQuery("FROM LibrarianTable").list();
+		         for (Iterator<?> iterator = rsvps.iterator(); iterator.hasNext();) {
+		            LibrarianTable rsvpIt = (LibrarianTable) iterator.next();
+		            resultList.add(rsvpIt);
+		         }
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return resultList;
+		   }
 }
