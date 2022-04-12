@@ -12,7 +12,7 @@ import datamodel.LibrarianTable;
 import util.LibrarianLoginUtil;
 
 @WebServlet("/HibernateLibrarianDB")
-public class HibernateLibrarianDB {
+public class HibernateLibrarianDB extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	   public HibernateLibrarianDB() {
