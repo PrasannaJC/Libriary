@@ -15,19 +15,22 @@ import javax.persistence.Table;
   PRIMARY KEY (id));
  */
 @Entity
-@Table(name = "LibrarianLogin")
+@Table(name = "LibrarianTable")
 public class LibrarianTable {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
    @Column(name = "id")
    private Integer id;
-   
-   @Column(name = "branch")
+  
+   @Column(name = "BRANCH")
    private String branch;
-
-   @Column(name = "pin")
+ 
+   @Column(name = "PIN")
    private String pin;
-   
+   public LibrarianTable() {
+	   super();
+   }
    public LibrarianTable(Integer id, String branch, String pin) {
       this.id = id;
       this.branch = branch;
@@ -45,11 +48,12 @@ public class LibrarianTable {
    public void setId(Integer id) {
       this.id = id;
    }
+  
    public String getbranch() {
 	      return this.branch;
 	   }
 
-   public void setPartyName(String branch) {
+   public void setBranchName(String branch) {
 	      this.branch = branch;
 	   }
    public String getPin() {
@@ -62,7 +66,7 @@ public class LibrarianTable {
      
    @Override
    public String toString() {
-      return "PARTY: " + this.branch + ", " + this.pin;
+      return "login info: " + this.branch + ", " + this.pin;
    }
 }
 
