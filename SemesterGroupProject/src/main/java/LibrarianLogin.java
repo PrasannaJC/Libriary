@@ -8,11 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.jni.File;
+
 import util.LibrarianLoginUtil;
 /**
  * Servlet implementation class LibrarianLogin
@@ -26,19 +30,22 @@ public class LibrarianLogin extends HttpServlet {
 	   }
 
 	   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		   response.setContentType("text/html");  
+		   PrintWriter out = response.getWriter();  
 		   String keyBranch = request.getParameter("branchName");
-		      String keyPin = request.getParameter("PinCode");
+		      String keyPin = request.getParameter("pinCode");
 		      boolean librarian = false;
 			  librarian = LibrarianLoginUtil.LibrarianLogin(keyBranch, keyPin);
-			  if (librarian == true) {
-				  response.setContentType("html");
-         	      PrintWriter out = response.getWriter();
-	       	      out.println("hello");
-	            }
-			  else {
-				  PrintWriter out = response.getWriter();
-	       	      out.println("incorrect branch or password");
+			  if (librarian) {
+				  RequestDispatcher rd=request.getRequestDispatcher("Home.html");  
+			        rd.forward(request,response);  
 			  }
+			  else {
+				  out.print("Sorry username or password error");  
+			        RequestDispatcher rd=request.getRequestDispatcher("LoginPage.html");  
+			        rd.include(request,response);  
+			  }
+			  out.close();  
 	   }
 
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
