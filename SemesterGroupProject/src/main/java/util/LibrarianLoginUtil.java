@@ -38,7 +38,7 @@ public class LibrarianLoginUtil {
 			   List<?> LL = session.createQuery("FROM LibrarianTable").list();
 			   for (Iterator<?> iterator = LL.iterator(); iterator.hasNext();) {
 				   LibrarianTable L = (LibrarianTable) iterator.next();
-				   if (L.getbranch().startsWith(keyBranch) &&  L.getPin().startsWith(keyPin)) {
+				   if (L.getbranch().equals(keyBranch) &&  L.getPin().equals(keyPin)) {
 					   		return true;
 		           }				   
 			   }
