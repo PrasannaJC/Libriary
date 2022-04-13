@@ -63,16 +63,27 @@ public class BookUtil {
 		   try {
 			   tx = session.beginTransaction();
 			   List<?> bks = session.createQuery("FROM Book").list();
+			   /*System.out.println(" keytitle is : " + keyTitle.length() + " , keyauth: " + keyAuthor.length() + " , keyisbn: " + keyISBN.length() + " , keycat: " + 
+					   keyCategory + " , keycopies: " + keyCopy + " , keyYear: " + keyYear);*/
 			   for (Iterator<?> iterator = bks.iterator(); iterator.hasNext();) {
 				   Book b = (Book) iterator.next();
-				   System.out.println(" keytitle: " + keyTitle + " , keyauth: " + keyAuthor + " , keyisbn: " + keyISBN + " , keycat: " + keyCategory + " , keycopies: " + keyCopy + " , keyYear: " + keyYear);
-				   if ((keyTitle == null || b.getTitle().startsWith(keyTitle)) && (keyAuthor == null || b.getAuthor().startsWith(keyAuthor)) &&
-		            		(keyISBN == null || b.getISBN13().startsWith(keyISBN)) && (keyCategory == null || b.getCategory().startsWith(keyCategory)) && 
-		            		(keyCopy == null || b.getCopies() == keyCopy) && (keyYear == null || b.getPublicationYear() == keyYear))
+				   //System.out.println(" keytitle is : " + keyTitle.length() + " , keyauth: " + keyAuthor.length() + " , keyisbn: " + keyISBN.length() + " , keycat: " + 
+				   //keyCategory + " , keycopies: " + keyCopy + " , keyYear: " + keyYear);
+				   //System.out.println(" Main title : " + b.getTitle() + " , Main author: " + b.getAuthor() + " , Main isbn: " + b.getISBN13() + " , Main cat: " + 
+				   //b.getCategory() + " , Main copies: " + b.getCopies() + " , Main Year: " + b.getPublicationYear());
+				   /*if ((keyTitle == "" || b.getTitle().startsWith(keyTitle)) && (keyAuthor == "" || b.getAuthor().startsWith(keyAuthor)) &&
+		            		(keyISBN == "" || b.getISBN13().startsWith(keyISBN)) && (keyCategory == "" || b.getCategory().startsWith(keyCategory)) && 
+		            		(keyCopy == 999 || b.getCopies() == keyCopy) && (keyYear == 10000 || b.getPublicationYear() == keyYear))
 		            		{
 					   			resultList.add(b);
 
-		            		}				   
+		            		}	*/
+				   if ((keyTitle == null || b.getTitle().startsWith(keyTitle)) && (keyAuthor == null || b.getAuthor().startsWith(keyAuthor)) &&
+		            		(keyISBN == null || b.getISBN13().startsWith(keyISBN)) && (keyCategory.equals("Please") || b.getCategory().startsWith(keyCategory)) && 
+		            		(keyCopy == 999 || b.getCopies().equals(keyCopy)) && (keyYear == 10000 || b.getPublicationYear().equals(keyYear)))
+				   {
+					   resultList.add(b);
+				   }
 			   }
 			   tx.commit();
 	      } catch (HibernateException e) {
