@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import util.BookUtil;
-//import util.Info;
+import util.Info;
 
 /**
  * Servlet implementation class BookInsert
@@ -57,8 +57,8 @@ public class BookInsert extends HttpServlet {
 	      out.println("<li> Description: " + keyDescription);
 	      out.println("<li> Publication Year: " + keyYear);
 	      out.println("</ul>");
-	      //out.println("<a href=/" + projectName + "/" + searchWebName + ">Insert Another Book</a> <br>");
-	      //out.println("<a href=/" + projectName + "/" + homeWebName + ">Back to Home Page</a> <br>");
+	      out.println("<a href=/" + Info.projectName + "/" + Info.searchWebName + ">Insert Another Book</a> <br>");
+	      out.println("<a href=/" + Info.projectName + "/" + Info.homeWebName + ">Back to Home Page</a> <br>");
 	      out.println("</body></html>");
 	}
 
