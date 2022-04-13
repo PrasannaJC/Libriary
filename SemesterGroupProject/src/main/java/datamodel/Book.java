@@ -18,14 +18,18 @@ import javax.persistence.Table;
 @Table(name = "BookTable")
 public class Book {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "BOOKID")
+	private String bookid;
+   
+	
    @Column(name = "TITLE")
    private String title;
 
    @Column(name = "AUTHOR")
    private String author;
-
+   
    @Column(name = "ISBN13")
    private String isbn13;
    
