@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;	 
+}
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;	      
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px;	 	 
+}
+footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
+</style>
+</head>
+
+<body>
+<header>
+<h1> Existing User Book Checkout </h1>
+</header>
+
+<nav>
+<a href="/SemesterGroupProject/Home.html">Home Page</a> <br>
+<a href="/SemesterGroupProject/New_User_Checkout.html">New User?</a> <br>
+</nav>
+
+<section>
+	<h1>Checkout Input</h1>
+	
+	<form action="[NAME OF JAVA CLASS]" method="POST">
+	
+		User ID: <input type="text" name="userID"> <br />
+		
+		<label for="bookListLabel">ISBNs:</label>
+		<textarea id="bookListLabel" name= "bookList" placeholder="Please enter up to 5 ISBN-13 numbers as a comma separated list without hyphens." rows="3" cols="30"></textarea>
+		
+		<label for="dateLabel"> Current Date:</label>
+		<input type="date" id="dateLabel" name="currentDate"> <br />
+		
+		<input type="submit" value="Checkout" />
+	</form>
+
+</section>
+
+<footer>
+Copyright 2022, The Librarians
+</footer>
+</body>
+</html>
