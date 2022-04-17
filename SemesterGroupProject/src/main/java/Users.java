@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datamodel.Book;
+import datamodel.User;
 import util.BookUtil;
 import util.UserUtil;
 
@@ -40,8 +41,9 @@ public class Users extends HttpServlet {
 		catch (IndexOutOfBoundsException e){
 			
 		}*/
-		
-		if (userExist(Integer.getInteger(keyID)))
+		Integer k = Integer.getInteger(keyID);
+		System.out.println("=> " + k);
+		if (userExist(k))
 		{
 			userCheckout(bookList);
 		}
@@ -63,6 +65,7 @@ public class Users extends HttpServlet {
 	{
 		//UserUtil.checkUser(keyID);
 		
+		
 		if (UserUtil.checkUser(keyID))
 		{
 			System.out.println("<li> The following user " + keyID + " exists and can check out books!!!");
@@ -70,7 +73,7 @@ public class Users extends HttpServlet {
 		}
 		else
 		{
-			System.out.println("<li> The following user " + keyID + " does not exists, so go create a new user");
+			System.out.println("<li> The following user bbb " + keyID + " does not exists, so go create a new user");
 			return false;
 		}
 	}
