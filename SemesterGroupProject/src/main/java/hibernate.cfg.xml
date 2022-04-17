@@ -12,6 +12,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="show_sql">false</property>
 		<mapping class="datamodel.Book" />
+		<mapping class="datamodel.User" />
 		<mapping class="datamodel.LibrarianTable"/>
 	</session-factory>
 </hibernate-configuration>
