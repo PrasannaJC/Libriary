@@ -2,13 +2,16 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.*;
 import datamodel.*;
 /**
  * Servlet implementation class UserCheckout
@@ -30,13 +33,34 @@ public class UserCheckout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");  
+		   java.sql.Date date = null;
 		   PrintWriter out = response.getWriter();
 		   String keyNewUser = request.getParameter("userName");
-		   String keyUser = request.getParameter("userID");
-		   String keybooks = request.getParameter("bookList");
+		   String keyUserID = request.getParameter("userID");
+		   String keyBooks = request.getParameter("bookList");
 		   String keyDate = request.getParameter("currentDate");
-		   
-		   
+           Integer userID = Integer.getInteger(keyUserID);
+           boolean updated = false;
+           String arr1[] = keyBooks.split(",");
+           for (String book : arr1) {
+        	   checkCopies
+           }
+		   if(keyNewUser != null) {
+			   UserUtil.createUser(keyNewUser, keyBooks,  date.valueOf(keyDate));
+		   }
+		   else if(keyUserID != null) {
+			   updated = UserUtil.updateUser(userID, keyBooks, date.valueOf(keyDate));
+			   if(!updated) {
+				   out.print("Sorry could not update due either because user does not exist "
+				   		+ "or because the user has books already checked out");  
+			        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
+			        rd.include(request,response);
+			   }else {
+				   out.print("updated, user checked out!");  
+				        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
+				        rd.include(request,response);
+			   }
+		   }
 		   
 	}
 
