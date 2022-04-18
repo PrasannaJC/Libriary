@@ -1,6 +1,8 @@
 package util;
 
 import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import datamodel.Book;
+import datamodel.User;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -110,5 +113,53 @@ public class BookUtil {
 	      } finally {
 	         session.close();
 	      }
+	   }
+	   public static boolean checkCopies(String isbn) {
+		   Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+
+		      try {
+		         tx = session.beginTransaction();
+		         List<?> bks = session.createQuery("FROM book").list();
+		         for (Iterator<?> iterator = bks.iterator(); iterator.hasNext();) 
+		         {
+		        	 Book b = (Book) iterator.next();
+		        	 if (b.getISBN13().equals(isbn) && b.getCopies() > 0)
+		        	 {
+		        		return true;
+		        	 }
+		         }
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return false;
+	   }
+	   public static void updateCopies(String isbn, int updateCopiesNumber ) {
+		   Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+
+		      try {
+		         tx = session.beginTransaction();
+		         List<?> bks = session.createQuery("FROM book").list();
+		         for (Iterator<?> iterator = bks.iterator(); iterator.hasNext();) 
+		         {
+		        	 Book b = (Book) iterator.next();
+		        	 if (b.getISBN13().equals(isbn) && b.getCopies() >= 0)
+		        	 {
+		        		 b.setCopies(b.getCopies() + updateCopiesNumber);
+		        		 session.save(b);
+		        	 }
+		         }
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
 	   }
 }
