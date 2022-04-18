@@ -22,7 +22,6 @@ public class BookInsert extends HttpServlet {
      */
     public BookInsert() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,9 +34,9 @@ public class BookInsert extends HttpServlet {
 		String keyCategory = request.getParameter("category"); //label it as whatever is designated in the HTML
 		Integer keyCopy = Integer.valueOf(request.getParameter("copies")); //label it as whatever is designated in the HTML
 		//String keyDescription = request.getParameter("description"); 
-		Integer keyYear = Integer.valueOf(request.getParameter("date")); //label it as whatever is designated in the HTML// TODO Auto-generated method stub
+		Integer keyYear = Integer.valueOf(request.getParameter("date")); //label it as whatever is designated in the HTML// 
 		
-		BookUtil.createBook(keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, keyYear);
+		BookUtil.createBook(keyTitle, keyAuthor, keyISBN, keyCategory, keyCopy, null, keyYear);
 		
 	      response.setContentType("text/html");
 	      PrintWriter out = response.getWriter();
@@ -66,7 +65,6 @@ public class BookInsert extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

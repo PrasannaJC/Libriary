@@ -62,28 +62,28 @@ public class UserUtil {
 	      return resultList;
 	}	
 	
-	public static List<User> listUsers(Integer userID, String userName, String[] books) 
+	public static List<User> listUsers(Integer userID, String userName, String books) 
 	{
 	      List<User> resultList = new ArrayList<User>();
 
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 
+			System.out.println("=> " + userID);
+			System.out.println("=> " + userName);
+			System.out.println("=> " + books);
+			
 	      try {
 	         tx = session.beginTransaction();
 	         List<?> usr = session.createQuery("FROM User").list();
 	         for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
 	         {
 	            User u = (User) iterator.next();
-	         /*   if ((userID == null || u.getUserID() == userID) && (books == null || u.getBooks().equals(books)) && (overdue == "" || u.getUserID() == userID))
+	            if ((userID == null || u.getUserID().equals(userID)) && (books == "" || books == null || u.getBooks().startsWith(books)) && (userName == "" || userName == null || u.getUsername().startsWith(userName)))
 	            {
-	            	
+	            	resultList.add(u);
 	            }
-	            
-	            */
-	            
-	            
-	            resultList.add(u);
+
 	         }
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -97,21 +97,21 @@ public class UserUtil {
 	}
 	
 	
-	public static boolean checkUser(Integer userID)
+	public static boolean checkUser(String userID)
 	{
 		//List<User> resultList = new ArrayList<User>();
 
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 	      Boolean out = false;
-
+	      int x = Integer.parseInt(userID); 
 	      try {
 	         tx = session.beginTransaction();
 	         List<?> usr = session.createQuery("FROM User").list();
 	         for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
 	         {
 	        	 User u = (User) iterator.next();
-	        	 if (u.getUserID().equals(userID))
+	        	 if (u.getUserID() == x)
 	        	 {
 	        		 out = true;
 	        		 break;
@@ -153,6 +153,38 @@ public class UserUtil {
 	      }
 	   }
 	
+	public static boolean updateUser(Integer UserID, String books, java.sql.Date checkout) {
+
+        Session session = getSessionFactory().openSession();
+          Transaction tx = null;
+
+          try {
+             tx = session.beginTransaction();
+             List<?> usr = session.createQuery("FROM User").list();
+             for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
+             {
+                 User u = (User) iterator.next();
+                 if (u.getUserID().equals(UserID) && u.getDue() == null)
+                 {
+                    u.setBooks(books);
+                    LocalDate start = checkout.toLocalDate();
+                        LocalDate due = start.plusDays(14);
+                        java.sql.Date d = Date.valueOf(due);
+                        u.setCheckout(checkout);
+                        u.setDue(d);
+                        session.save(u);
+                        return true;
+                 }
+             }
+          } catch (HibernateException e) {
+             if (tx != null)
+                tx.rollback();
+             e.printStackTrace();
+          } finally {
+             session.close();
+          }
+          return false;
+       }
 	
 	
 	
