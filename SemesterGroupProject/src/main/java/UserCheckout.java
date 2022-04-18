@@ -41,21 +41,34 @@ public class UserCheckout extends HttpServlet {
 		   String keyDate = request.getParameter("currentDate");
            Integer userID = Integer.getInteger(keyUserID);
            boolean updated = false;
+           boolean avaibleCopies = true;
            String arr1[] = keyBooks.split(",");
            for (String book : arr1) {
-        	   checkCopies
+        	  if (avaibleCopies) {
+        		  avaibleCopies =  BookUtil.checkCopies(book);
+        	  }
+        	  else {
+        		  break;
+        	  }
            }
 		   if(keyNewUser != null) {
 			   UserUtil.createUser(keyNewUser, keyBooks,  date.valueOf(keyDate));
 		   }
 		   else if(keyUserID != null) {
-			   updated = UserUtil.updateUser(userID, keyBooks, date.valueOf(keyDate));
+			   if(avaibleCopies) {
+				   updated = UserUtil.updateUser(userID, keyBooks, date.valueOf(keyDate));
+				   for (String book : arr1) { 
+			            BookUtil.updateCopies(book, -1);
+			           }
+			   }
 			   if(!updated) {
 				   out.print("Sorry could not update due either because user does not exist "
-				   		+ "or because the user has books already checked out");  
+				   		+ "or because the user has books already checked out "
+				   		+ "or there are no more avaible copies for a book");  
 			        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
 			        rd.include(request,response);
 			   }else {
+				   
 				   out.print("updated, user checked out!");  
 				        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
 				        rd.include(request,response);
