@@ -42,7 +42,7 @@ public class UserCheckout extends HttpServlet {
            Integer userID = Integer.getInteger(keyUserID);
            boolean updated = false;
            boolean avaibleCopies = true;
-           String arr1[] = keyBooks.split(",");
+           String arr1[] = keyBooks.split(", ");
            for (String book : arr1) {
         	  if (avaibleCopies) {
         		  avaibleCopies =  BookUtil.checkCopies(book);
