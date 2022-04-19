@@ -185,7 +185,45 @@ public class UserUtil {
           }
           return false;
        }
-	
+	public static void returnUserBook(Integer UserID, String book) {
+
+        Session session = getSessionFactory().openSession();
+          Transaction tx = null;
+
+          try {
+             tx = session.beginTransaction();
+             List<?> usr = session.createQuery("FROM User").list();
+             for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
+             {
+                 User u = (User) iterator.next();
+                 String bookin[] = u.getBooks().split(", ");
+                 String books = "";
+                 if (u.getUserID().equals(UserID)){
+		             for (int pos = 0; 0 < bookin.length; pos ++) {
+		                 if (bookin[pos].equals(book)){
+		                        bookin[pos] = "";
+		                 } 
+		                 if (!bookin[pos].equals("")) {
+		                	 books = books + ", " + bookin[pos];
+		                 }
+		             } 
+		             if(books.equals("")) { 
+	                 	u.setBooks(null);
+	                 	u.setDue(null);
+	                 	u.setCheckout(null);
+		             }else {
+		            	u.setBooks(books);
+		             }
+                 }       
+             }   
+          } catch (HibernateException e) {
+             if (tx != null)
+                tx.rollback();
+             e.printStackTrace();
+          } finally {
+             session.close();
+          }
+       }
 	
 	
 }
