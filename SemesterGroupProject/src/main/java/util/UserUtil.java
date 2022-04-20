@@ -225,5 +225,45 @@ public class UserUtil {
           }
        }
 	
+	public static List<User> overdue()
+	{
+		//java.time.LocalDate checkout = date.toLocalDate();
+		java.time.LocalDate today = LocalDate.now();
+		System.out.println("=> " + today);
+		List<User> resultList = new ArrayList<User>();
+
+		Session session = getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+		   tx = session.beginTransaction();
+		   List<?> usr = session.createQuery("FROM User").list();
+		   java.time.LocalDate due;
+		   for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
+		   {
+		      User u = (User) iterator.next();
+		      System.out.println("=> " + u.getDue());
+		      due = u.getDue().toLocalDate();
+		      
+		      if (due.compareTo(today) > 14)
+		      {
+		    	  resultList.add(u);
+		      }
+		   }
+		   tx.commit();
+		} catch (HibernateException e) {
+		   if (tx != null)
+		      tx.rollback();
+		   e.printStackTrace();
+		} finally {
+		   session.close();
+		}
+		
+		return resultList;
+
+	}
+	
+	
+	
+	
 	
 }
