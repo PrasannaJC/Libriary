@@ -79,7 +79,7 @@ public class UserUtil {
 	         for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
 	         {
 	            User u = (User) iterator.next();
-	            if ((userID == null || u.getUserID().equals(userID)) && (books == "" || books == null || u.getBooks().startsWith(books)) && (userName == "" || userName == null || u.getUsername().startsWith(userName)))
+	            if ((userID == null || u.getUserID().equals(userID)) && (books == "" || books == null || u.getBooks().contains(books)) && (userName == "" || userName == null || u.getUsername().startsWith(userName)))
 	            {
 	            	resultList.add(u);
 	            }
