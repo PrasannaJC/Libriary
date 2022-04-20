@@ -34,7 +34,7 @@ public class Overdue extends HttpServlet {
 
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
-	    String title = "Database Result";
+	    String title = "Overdue Result";
 	    String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
 	    out.println(docType + //
 	        "<html>\n" + //
@@ -46,7 +46,7 @@ public class Overdue extends HttpServlet {
 	    List<User> u = null;
 
 		u = UserUtil.overdue();
-
+		out.println("The following users have overdue books!!!");
 	    display(u, out);
 	    out.println("</ul>");
 	    out.println("<a href=/" + Info.projectName + "/" + Info.homeWebName + ">Go Back to Home Page</a> <br>");
@@ -54,7 +54,7 @@ public class Overdue extends HttpServlet {
 	    out.println("</body></html>");
 		
 	}
-	
+	/*
 	public void overdue(java.sql.Date date)
 	{
 		java.time.LocalDate checkout = date.toLocalDate();
@@ -66,10 +66,11 @@ public class Overdue extends HttpServlet {
 			System.out.println("You have overdue books!!! Go return the existing ones before you checkout new ones!!!");
 		}
 	}
-	
+	*/
 	void display(List<User> u, PrintWriter out) 
 	{
-	      for (User x : u) {
+	      
+		for (User x : u) {
 	         System.out.println("[DBG] " + x.getUserID() + ", " //
 	        		 + x.getUsername() + ", " //
 	        		 + x.getBooks() + ", " //
