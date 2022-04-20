@@ -46,13 +46,15 @@ footer {
 	
 	<form action="UserCheckout" method="POST">
 	
-		User Name: <input type="text" name="userName"> <br />
+		User Name: <br />
+		<input type="text" name="userName"> <br />
 		
-		<label for="bookListLabel">ISBNs:</label>
-		<textarea id="bookListLabel" name= "bookList" placeholder="Please enter up to 5 ISBN-13 numbers as a comma separated list without hyphens." rows="3" cols="30"></textarea>
-		
-		<label for="dateLabel"> Current Date:</label>
-		<input type="date" id="dateLabel" name="currentDate"> <br />
+		ISBNs: <br />
+		<input type="text" name="isbn1" placeholder="Enter an ISBN number."> <br />
+		<input type="text" name="isbn2" placeholder="Enter an ISBN number."> <br />
+		<input type="text" name="isbn3" placeholder="Enter an ISBN number."> <br />
+		<input type="text" name="isbn4" placeholder="Enter an ISBN number."> <br />
+		<input type="text" name="isbn5" placeholder="Enter an ISBN number."> <br />
 		
 		<input type="submit" value="Checkout" />
 	</form>
