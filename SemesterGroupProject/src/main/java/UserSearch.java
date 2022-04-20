@@ -37,14 +37,10 @@ public class UserSearch extends HttpServlet {
 		String keyName = request.getParameter("userName"); //label it as whatever is designated in the HTML
 		String keyISBN = request.getParameter("bookList"); //label it as whatever is designated in the HTML
 		
-		String[] bookList = keyISBN.split(", ");
-		/*try {
-			//bookList.length() <= 5;
-			int k = bookList.length;
-		}
-		catch (IndexOutOfBoundsException e){
-			
-		}*/
+		
+		
+		//String[] bookList = keyISBN.split(", ");
+
 		Integer k = Integer.getInteger(keyID);
 		try { 
 			k = Integer.valueOf(request.getParameter("userID")); //label it as whatever is designated in the HTML
