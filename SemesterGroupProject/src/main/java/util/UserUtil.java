@@ -214,8 +214,10 @@ public class UserUtil {
 		             }else {
 		            	u.setBooks(books);
 		             }
-                 }       
-             }   
+                 }  
+                 session.save(u);
+             }  
+             
           } catch (HibernateException e) {
              if (tx != null)
                 tx.rollback();
