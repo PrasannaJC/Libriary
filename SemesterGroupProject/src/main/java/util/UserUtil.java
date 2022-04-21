@@ -203,9 +203,12 @@ public class UserUtil {
 		                 if (bookin[pos].equals(book)){
 		                        bookin[pos] = "";
 		                 } 
-		                 if (!bookin[pos].equals("")) {
+		                 if (!bookin[pos].equals("") && books.equals("")) {
+		                	 books = bookin[pos];
+		                 } else {
 		                	 books = books + ", " + bookin[pos];
 		                 }
+		                 
 		             } 
 		             if(books.equals("")) { 
 	                 	u.setBooks(null);
