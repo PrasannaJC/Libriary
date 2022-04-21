@@ -33,11 +33,22 @@ public class returnBooks extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");  
 		   String keyUserID = request.getParameter("userID");
-		   String booksToReturn = request.getParameter("booklist");
-		   String arr1[] = booksToReturn.split(", ");
+		   String ISBN1 = request.getParameter("isbn1");
+		   String ISBN2 = request.getParameter("isbn2");
+		   String ISBN3 = request.getParameter("isbn3");
+		   String ISBN4 = request.getParameter("isbn4");
+		   String ISBN5 = request.getParameter("isbn5");
+           String Books [] = new String [5];
+           Books[0] = ISBN1;
+           Books[1] = ISBN2;
+           Books[2] = ISBN3;
+           Books[3] = ISBN4;
+           Books[4] = ISBN5;
 		   Integer userID = Integer.getInteger(keyUserID);
-		   for(String book: arr1) {
-			   UserUtil.returnUserBook(userID, book);
+		   for(String book: Books) {
+			   if(book != null) {
+				   UserUtil.returnUserBook(userID, book);
+			   }
 		   }
 	}
 
