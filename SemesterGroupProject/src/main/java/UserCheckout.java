@@ -37,10 +37,31 @@ public class UserCheckout extends HttpServlet {
 		   PrintWriter out = response.getWriter();
 		   String keyNewUser = request.getParameter("userName");
 		   String keyUserID = request.getParameter("userID");
-		   String keyBooks = request.getParameter("bookList");
+		   String ISBN1 = request.getParameter("isbn1");
+		   String ISBN2 = request.getParameter("isbn2");
+		   String ISBN3 = request.getParameter("isbn3");
+		   String ISBN4 = request.getParameter("isbn4");
+		   String ISBN5 = request.getParameter("isbn5");
 		   String keyDate = request.getParameter("currentDate");
            Integer userID = Integer.getInteger(keyUserID);
            boolean updated = false;
+           String keyBooks = "";
+           String Books [] = new String [5];
+           Books[0] = ISBN1;
+           Books[1] = ISBN2;
+           Books[2] = ISBN3;
+           Books[3] = ISBN4;
+           Books[4] = ISBN5;
+           for (int pos = 0; 0 < Books.length; pos ++) {
+               if (Books[pos].equals(null)){
+                      Books[pos] = "";
+               } 
+               else if (!Books[pos].equals(null) && keyBooks.equals("")) {
+              	 keyBooks =  Books[pos];
+               }else if (!Books[pos].equals(null) ) {
+                	 keyBooks = keyBooks + ", " + Books[pos];
+                }
+           } 
            boolean avaibleCopies = true;
            String arr1[] = keyBooks.split(", ");
            for (String book : arr1) {
