@@ -41,9 +41,12 @@ public class LibrarianLogin extends HttpServlet {
 			        rd.forward(request,response);  
 			  }
 			  else {
-				  out.print("Sorry username or password error");  
+				  //out.print("Sorry username or password error");
 			        RequestDispatcher rd=request.getRequestDispatcher("LoginPage.html");  
-			        rd.include(request,response);  
+			        rd.include(request,response);
+			        out.println("<script type=\"text/javascript\">");
+					out.println("alert('The Branch Name or Pin Code is Invalid');");
+					out.println("</script>");
 			  }
 			  out.close();  
 	   }
