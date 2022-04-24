@@ -207,7 +207,7 @@ public class UserUtil {
 		                 if (bookpos.equals(book)){
 		                        bookpos = "";
 		                 } 
-		                 if (!bookpos.equals("") && books.equals("")) {
+		                 if (bookpos.equals("") && books.equals("")) {
 		                	 books = bookpos;
 		                 } else {
 		                	 books = books + ", " + bookpos;
