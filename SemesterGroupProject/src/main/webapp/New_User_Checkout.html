@@ -1,32 +1,177 @@
-<!DOCTYPE html>
 <html>
 <head>
 <style>
-header {
+header
+{
     background-color:black;
-    color:white;
+    border: 2px solid #b5a965;
+    color:#b5a965;
+    
     text-align:center;
+    
     padding:5px;	 
 }
-nav {
+nav
+{
     line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
+    background-color:#451919;
+    border: 2px solid #b5a965;
+    
+    min-height:300px;
+    max-height:1920px;
+    height: 100%;
     width:100px;
+    
     float:left;
-    padding:5px;	      
+    padding:5px;
+    
+    text-align: center;		      
 }
-section {
-    width:350px;
-    float:left;
-    padding:10px;	 	 
+/* The body makes use of a free stock/royalty free image that was sourced from Pexels.com */
+body
+{
+	background-image: url('pexels-negative-space-34592.jpg');
+	min-height: 300px;
+	max-height: 1920px;
+	height: 100%;
+	
+	width: 100%;
+	margin: auto;
+	
+	text-align: center;
 }
-footer {
+section
+{
+    float:center;	 	 
+}
+footer
+{
     background-color:black;
-    color:white;
+    border: 2px solid #b5a965;
+    color:#b5a965;
+    
     clear:both;
+    
     text-align:center;
-    padding:5px;	 	 
+    
+    padding:5px; 
+}
+button
+{
+  border: 2px solid #b5a965;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  
+  background-color: black;
+  color: #b5a965;
+  
+  margin: 4px 2px;
+  padding: 6px 6px;
+  
+  text-align: center;
+  text-decoration: none;
+  
+  display: inline-block;
+  cursor: pointer;
+  
+  width: 90px;
+  height: 50px;
+  position: static;
+
+}
+button:hover
+{
+	background-color:#b5a965;
+	color: black;
+}
+.outerBox
+{
+	border: 2px solid #b5a965;
+	
+	width: 265px;
+  	float: center;
+  	
+  	margin: auto;
+}
+.checkoutRow
+{
+  	background-color: black;
+	color: #b5a965;
+  	border: 2px solid black;
+  	
+  	text-align: center;
+  	
+  	width: 230px;
+  	float: center;
+  	
+  	margin: auto;
+ 	padding: 15px;
+}
+.checkoutButton
+{
+	background-color: black;
+	border: 2px solid black;
+  	
+  	text-align: center;
+  	
+  	width: 230px;
+  	float: center;
+  	
+  	margin: auto;
+  	padding: 15px;
+}
+input[type=text]
+{
+	margin: 5px;
+    padding:5px; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+input[type=text]:hover
+{
+    border-color: #8a1616;
+}
+input[type=text]:focus
+{
+    border-color: #8a1616;
+}
+select
+{
+	margin: 5px;
+    padding: 5px;
+    
+    color: #b5a965; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+select:hover
+{
+	border-color: #8a1616;
+}
+select:focus
+{
+	border-color: #8a1616;
+}
+input[type=submit]
+{
+    padding:5px 15px; 
+    background: #451919; 
+    color: #b5a965;
+    
+    cursor:pointer;
+    
+    border:2px solid #b5a965;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; 
+}
+input[type=submit]:hover
+{
+    background: #b5a965;
+    color: #451919;
 }
 </style>
 </head>
@@ -37,28 +182,31 @@ footer {
 </header>
 
 <nav>
-<a href="/SemesterGroupProject/Home.html">Home Page</a> <br>
-<a href="/SemesterGroupProject/User_Checkout.html">Existing User?</a> <br>
+<a href="/SemesterGroupProject/Home.html"><Button>Home Page</Button></a> <br>
+<a href="/SemesterGroupProject/User_Checkout.html"><Button>Existing User?</Button></a> <br>
 </nav>
 
 <section>
-	<h1>Checkout Input</h1>
-	
+	<h1> </h1>
 	<form action="UserCheckout" method="POST">
-	
-		User Name: <br />
-		<input type="text" name="userName"> <br />
-		
-		ISBNs: <br />
-		<input type="text" name="isbn1" placeholder="Enter an ISBN number."> <br />
-		<input type="text" name="isbn2" placeholder="Enter an ISBN number."> <br />
-		<input type="text" name="isbn3" placeholder="Enter an ISBN number."> <br />
-		<input type="text" name="isbn4" placeholder="Enter an ISBN number."> <br />
-		<input type="text" name="isbn5" placeholder="Enter an ISBN number."> <br />
-		
-		<input type="submit" value="Checkout" />
+		<div class="outerBox">
+			<div class="checkoutRow">
+			User Name: <br />
+			<input type="text" placeholder="Enter the User's Name" name="userName"> <br />
+			
+			ISBNs: <br />
+			<input type="text" name="isbn1" placeholder="Enter a 1st ISBN"> <br />
+			<input type="text" name="isbn2" placeholder="Enter a 2nd ISBN"> <br />
+			<input type="text" name="isbn3" placeholder="Enter a 3rd ISBN"> <br />
+			<input type="text" name="isbn4" placeholder="Enter a 4th ISBN"> <br />
+			<input type="text" name="isbn5" placeholder="Enter a 5th ISBN"> <br />
+			</div>
+			
+			<div class="checkoutButton">
+			<input type="submit" value="Checkout" />
+			</div>
+		</div>
 	</form>
-
 </section>
 
 <footer>
