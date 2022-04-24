@@ -7,41 +7,45 @@ header
 	background-color:#101010;
 	border: 2px solid #b5a965;
     color:#b5a965;
+	
 	text-align:center;
+	
 	padding:5px;
 }
-
 section
 {
 	background-color:#451919;
-	width:100%;
 	min-width:350px;
 	max-width:1920px;
-	height:100%;
+	width:100%;
+	
 	min-height:200px;
-	max-height:830px;
+	max-height:1920px;
+	height:100%;
+	
     float:left;
 }
-
 footer
 {
 	background-color:#101010;
     border: 2px solid #b5a965;
     color:#b5a965;
+    
     clear:both;
+    
     text-align:center;
+    
     padding:5px;
 }
 .outerBox
 {
 	border: 2px solid #b5a965;
 	
-	width: 319px;
+	width: 384px;
   	float: center;
   	
   	margin: auto;
 }
-/*A div for containing rows of search options to be placed in the center of the background*/
 .loginRow
 {
   	background-color: black;
@@ -50,13 +54,12 @@ footer
   	
   	text-align: right;
   	
-  	width: 285px;
+  	width: 350px;
   	float: center;
   	
   	margin: auto;
  	padding: 15px;
 }
-/*A div for centering the submit buttion within the background (just below search options)*/
 .loginSubmit
 {
 	background-color: black;
@@ -64,11 +67,62 @@ footer
   	
   	text-align: center;
   	
-  	width: 285px;
+  	width: 350px;
   	float: center;
   	
   	margin: auto;
   	padding: 15px;
+}
+input[type=text]
+{
+	margin: 5px;
+    padding:5px; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+input[type=text]:hover
+{
+    border-color: #8a1616;
+}
+input[type=text]:focus
+{
+    border-color: #8a1616;
+}
+input[type=password]
+{
+	margin: 5px;
+    padding:5px; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+input[type=password]:hover
+{
+    border-color: #8a1616;
+}
+input[type=password]:focus
+{
+    border-color: #8a1616;
+}
+input[type=submit]
+{
+    padding:5px 15px; 
+    background: #451919; 
+    color: #b5a965;
+    
+    cursor:pointer;
+    
+    border:2px solid #b5a965;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; 
+}
+input[type=submit]:hover
+{
+    background: #b5a965;
+    color: #451919;
 }
 </style>
 </head>
@@ -80,24 +134,21 @@ footer
 </header>
 
 <section>
-	
-	<h1 style="color:#b5a965;font-size:100%;font-size:3.75vh; ;text-align:center;">
+	<h1 style="color:#b5a965;font-size:2vw;text-align:center;">
 	Welcome to the library management system!<br>
 	You must enter your branch name and pin code<br>
 	to proceed into the system.
 	</h1>
-	
-	<form action="LibrarianLogin" method="POST">
-		
+	<form action="LibrarianLogin" method="POST">	
 		<div class="outerBox">
 			<div class="loginRow">
 			<label for="branchLabel">Branch Name: </label>
-			<input id="branchLabel" type="text" name="branchName">
+			<input id="branchLabel" type="text" placeholder="Enter a Branch Name" name="branchName">
 			</div>
 			
 			<div class="loginRow">
 			<label for="pinLabel">Pin Code: </label>
-			<input id="pinLabel" type="password" name="pinCode">
+			<input id="pinLabel" type="password" placeholder="Enter a Pin Code" name="pinCode">
 			</div>
 			
 			<div class="loginSubmit">
@@ -105,8 +156,6 @@ footer
 			</div>
 		</div>
 	</form>
-	
-	
 </section>
 
 <footer>
