@@ -45,9 +45,9 @@ public class returnBooks extends HttpServlet {
            Books[2] = ISBN3;
            Books[3] = ISBN4;
            Books[4] = ISBN5;
-		   Integer userID = Integer.getInteger(keyUserID);
+		   Integer userID = Integer.valueOf(keyUserID);
 		   for(String book: Books) {
-			   if(book != null) {
+			   if(!book.isEmpty()) {
 				   UserUtil.returnUserBook(userID, book);
 				   BookUtil.updateCopies(book, 1);
 			   }
