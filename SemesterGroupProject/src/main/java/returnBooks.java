@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.BookUtil;
 import util.UserUtil;
 
 /**
@@ -48,6 +49,7 @@ public class returnBooks extends HttpServlet {
 		   for(String book: Books) {
 			   if(book != null) {
 				   UserUtil.returnUserBook(userID, book);
+				   BookUtil.updateCopies(book, 1);
 			   }
 		   }
 	}
