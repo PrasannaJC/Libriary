@@ -254,7 +254,7 @@ public class UserUtil {
 		      System.out.println("=> " + u.getDue());
 		      due = u.getDue().toLocalDate();
 		      
-		      if (due.compareTo(today) > 14)
+		      if (due.compareTo(today) <= 0)
 		      {
 		    	  resultList.add(u);
 		      }
