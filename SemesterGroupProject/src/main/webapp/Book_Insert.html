@@ -6,7 +6,9 @@ header
     background-color:black;
     border: 2px solid #b5a965;
     color:#b5a965;
+    
     text-align:center;
+    
     padding:5px;	 
 }
 nav
@@ -16,7 +18,7 @@ nav
     border: 2px solid #b5a965;
     
     min-height:300px;
-    max-height:830px;
+    max-height:1920px;
     height: 100%;
     width:100px;
     
@@ -25,12 +27,11 @@ nav
     
     text-align: center;	      
 }
-/* The body makes use of a free stock/royalty free image that was sourced from Pexels.com */
 body
 {
 	background-image: url('pexels-negative-space-34592.jpg');
 	min-height: 300px;
-	max-height: 830px;
+	max-height: 1920px;
 	height: 100%;
 	
 	width: 100%;
@@ -47,40 +48,50 @@ footer
     background-color:black;
     border: 2px solid #b5a965;
     color:#b5a965;
+    
     clear:both;
+    
     text-align:center;
+   
     padding:5px;	 	 
-}
-.outerBox
-{
-	border: 2px solid #b5a965;
-	
-	width: 445px;
-  	float: center;
-  	
-  	margin: auto;
 }
 button
 {
   border: 2px solid #b5a965;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  
   background-color: black;
   color: #b5a965;
+  
+  margin: 4px 2px;
   padding: 6px 6px;
+  
   text-align: center;
   text-decoration: none;
+  
   display: inline-block;
-  margin: 4px 2px;
   cursor: pointer;
+  
   width: 90px;
   height: 50px;
   position: static;
+
 }
 button:hover
 {
 	background-color:#b5a965;
 	color: black;
 }
-/*A div for containing rows of search options to be placed in the center of the background*/
+.outerBox
+{
+	border: 2px solid #b5a965;
+	
+	width: 525px;
+  	float: center;
+  	
+  	margin: auto;
+}
 .insertRow
 {
   	background-color: black;
@@ -89,13 +100,12 @@ button:hover
   	
   	text-align: right;
   	
-  	width: 410px;
+  	width: 490px;
   	float: center;
   	
   	margin: auto;
  	padding: 15px;
 }
-/*A div for centering the submit buttion within the background (just below search options)*/
 .insertButton
 {
 	background-color: black;
@@ -103,11 +113,64 @@ button:hover
   	
   	text-align: center;
   	
-  	width: 410px;
+  	width: 490px;
   	float: center;
   	
   	margin: auto;
   	padding: 15px;
+}
+input[type=text]
+{
+	margin: 5px;
+    padding:5px; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+input[type=text]:hover
+{
+    border-color: #8a1616;
+}
+input[type=text]:focus
+{
+    border-color: #8a1616;
+}
+select
+{
+	margin: 5px;
+    padding: 5px;
+    
+    color: #b5a965; 
+    
+    border:2px solid #b5a965; 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+select:hover
+{
+	border-color: #8a1616;
+}
+select:focus
+{
+	border-color: #8a1616;
+}
+input[type=submit]
+{
+    padding:5px 15px; 
+    background: #451919; 
+    color: #b5a965;
+    
+    cursor:pointer;
+    
+    border:2px solid #b5a965;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; 
+}
+input[type=submit]:hover
+{
+    background: #b5a965;
+    color: #451919;
 }
 </style>
 </head>
@@ -123,13 +186,12 @@ button:hover
 
 <section>
 	<h1> </h1>
-	
 	<form action="BookInsert" method="POST">
 	
 		<div class="outerBox">
 			<div class="insertRow">
 			<label for="titleLabel">Title: </label>
-			<input id="titleLabel" type="text" name="booktitle">
+			<input id="titleLabel" type="text" placeholder="Enter a Title" name="booktitle">
 			
 			<label for="categoryLabel"> Category: </label>
 			<select id="categoryLabel" name="category">
@@ -145,7 +207,7 @@ button:hover
 		
 			<div class="insertRow">
 			<label for="authorLabel">Author: </label>
-			<input id="authorLabel" type="text" name="writer">
+			<input id="authorLabel" type="text" placeholder="Enter an Author" name="writer">
 			
 			<label for="copyLabel"> Copies: </label>
 			<select id="copyLabel" name="copies">
@@ -161,9 +223,9 @@ button:hover
 			
 			<div class="insertRow">
 			<label for="isbnLabel">ISBN: </label>
-			<input id="isbnLabel" type="text" name="ISBN">
+			<input id="isbnLabel" type="text" placeholder="Enter an ISBN" name="ISBN">
 			
-			<label for="yearLabel"> Year: </label>
+			<label for="yearLabel"> Decade: </label>
 			<select id="yearLabel" name="date">
 				<option value = "10000" selected>Please Select</option>
 	            <option value = "1970">1970</option>
@@ -227,7 +289,6 @@ button:hover
 			</div>
 		</div>
 	</form>
-
 </section>
 
 <footer>
