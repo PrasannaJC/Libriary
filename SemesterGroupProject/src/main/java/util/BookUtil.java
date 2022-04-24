@@ -152,8 +152,6 @@ public class BookUtil {
 		        	 {
 		        		 b.setCopies(b.getCopies() + updateCopiesNumber);
 		        		 session.update(b);
-		        		 tx.commit();
-				         session.close();
 		        	 }
 		         }
 		      } catch (HibernateException e) {
