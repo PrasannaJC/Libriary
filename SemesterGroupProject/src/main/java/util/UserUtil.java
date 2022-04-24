@@ -164,7 +164,7 @@ public class UserUtil {
              for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
              {
                  User u = (User) iterator.next();
-                 if (u.getUserID().equals(UserID) && u.getDue().equals(null))
+                 if (u.getUserID().equals(UserID) && u.getDue() == null)
                  {
                 	 	u.setBooks(books);
                 	 	LocalDate checkout = LocalDate.now();
@@ -174,6 +174,7 @@ public class UserUtil {
                         u.setCheckout(c);
                         u.setDue(d);
                         session.update(u);
+                       
                         return true;
                  }
              }
@@ -182,6 +183,7 @@ public class UserUtil {
                 tx.rollback();
              e.printStackTrace();
           } finally {
+        	 tx.commit();
              session.close();
           }
           return false;
@@ -197,17 +199,18 @@ public class UserUtil {
              for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
              {
                  User u = (User) iterator.next();
-                 String bookin[] = u.getBooks().split(", ");
-                 String books = "";
                  if (u.getUserID().equals(UserID)){
-		             for (int pos = 0; 0 < bookin.length; pos ++) {
-		                 if (bookin[pos].equals(book)){
-		                        bookin[pos] = "";
+                	 System.out.println(u.getBooks());
+                	 String bookin[] = u.getBooks().split(", ");
+                     String books = "";
+		             for (String bookpos : bookin) {
+		                 if (bookpos.equals(book)){
+		                        bookpos = "";
 		                 } 
-		                 if (!bookin[pos].equals("") && books.equals("")) {
-		                	 books = bookin[pos];
+		                 if (!bookpos.equals("") && books.equals("")) {
+		                	 books = bookpos;
 		                 } else {
-		                	 books = books + ", " + bookin[pos];
+		                	 books = books + ", " + bookpos;
 		                 }
 		                 
 		             } 
@@ -227,6 +230,7 @@ public class UserUtil {
                 tx.rollback();
              e.printStackTrace();
           } finally {
+        	 tx.commit();
              session.close();
           }
        }
