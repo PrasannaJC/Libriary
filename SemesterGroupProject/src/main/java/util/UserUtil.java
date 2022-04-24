@@ -131,17 +131,17 @@ public class UserUtil {
 	         return out;
 	}
 	
-	public static void createUser(String userName, String books, java.sql.Date checkout) {
+	public static void createUser(String userName, String books) {
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try {
 	         tx = session.beginTransaction();
-	         //java.util.Date due = new java.util.Date(checkout.getTime());
-	         LocalDate start = checkout.toLocalDate();
+			//java.util.Date due = new java.util.Date(checkout.getTime());
+	         LocalDate start = LocalDate.now();
 	         LocalDate due = start.plusDays(14);
 	         java.sql.Date d = Date.valueOf(due);
-
-	         session.save(new User(userName, books, checkout, d));
+	         java.sql.Date c = Date.valueOf(start);
+	         session.save(new User(userName, books, c, d));
 	         
 	         tx.commit();
 	      } catch (HibernateException e) {
@@ -153,7 +153,7 @@ public class UserUtil {
 	      }
 	   }
 	
-	public static boolean updateUser(Integer UserID, String books, java.sql.Date checkout) {
+	public static boolean updateUser(Integer UserID, String books) {
 
         Session session = getSessionFactory().openSession();
           Transaction tx = null;
@@ -164,15 +164,16 @@ public class UserUtil {
              for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
              {
                  User u = (User) iterator.next();
-                 if (u.getUserID().equals(UserID) && u.getDue() == null)
+                 if (u.getUserID().equals(UserID) && u.getDue().equals(null))
                  {
-                    u.setBooks(books);
-                    LocalDate start = checkout.toLocalDate();
-                        LocalDate due = start.plusDays(14);
+                	 	u.setBooks(books);
+                	 	LocalDate checkout = LocalDate.now();
+                        LocalDate due = checkout.plusDays(14);
                         java.sql.Date d = Date.valueOf(due);
-                        u.setCheckout(checkout);
+                        java.sql.Date c = Date.valueOf(checkout);
+                        u.setCheckout(c);
                         u.setDue(d);
-                        session.save(u);
+                        session.update(u);
                         return true;
                  }
              }
@@ -218,7 +219,7 @@ public class UserUtil {
 		            	u.setBooks(books);
 		             }
                  }  
-                 session.save(u);
+                 session.update(u);
              }  
              
           } catch (HibernateException e) {
