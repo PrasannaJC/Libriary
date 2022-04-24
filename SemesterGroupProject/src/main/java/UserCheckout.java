@@ -33,7 +33,6 @@ public class UserCheckout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");  
-		   java.sql.Date date = null;
 		   PrintWriter out = response.getWriter();
 		   String keyNewUser = request.getParameter("userName");
 		   String keyUserID = request.getParameter("userID");
@@ -42,7 +41,6 @@ public class UserCheckout extends HttpServlet {
 		   String ISBN3 = request.getParameter("isbn3");
 		   String ISBN4 = request.getParameter("isbn4");
 		   String ISBN5 = request.getParameter("isbn5");
-		   String keyDate = request.getParameter("currentDate");
            Integer userID = Integer.getInteger(keyUserID);
            boolean updated = false;
            String keyBooks = "";
@@ -52,15 +50,15 @@ public class UserCheckout extends HttpServlet {
            Books[2] = ISBN3;
            Books[3] = ISBN4;
            Books[4] = ISBN5;
-           for (int pos = 0; 0 < Books.length; pos ++) {
-               if (Books[pos].equals(null)){
-                      Books[pos] = "";
+           for (String book : Books) {
+               if (book.isEmpty()){
+                      book = "";
                } 
-               else if (!Books[pos].equals(null) && keyBooks.equals("")) {
-              	 keyBooks =  Books[pos];
-               }else if (!Books[pos].equals(null) ) {
-                	 keyBooks = keyBooks + ", " + Books[pos];
-                }
+               else if (!book.equals(null) && keyBooks.equals("")) {
+              	 keyBooks =  book;
+               }else if (!book.equals(null) ) {
+                	 keyBooks = keyBooks + ", " + book;
+               }
            } 
            boolean avaibleCopies = true;
            String arr1[] = keyBooks.split(", ");
@@ -73,11 +71,11 @@ public class UserCheckout extends HttpServlet {
         	  }
            }
 		   if(keyNewUser != null) {
-			   UserUtil.createUser(keyNewUser, keyBooks,  date.valueOf(keyDate));
+			   UserUtil.createUser(keyNewUser, keyBooks);
 		   }
 		   else if(keyUserID != null) {
 			   if(avaibleCopies) {
-				   updated = UserUtil.updateUser(userID, keyBooks, date.valueOf(keyDate));
+				   updated = UserUtil.updateUser(userID, keyBooks);
 				   for (String book : arr1) { 
 			            BookUtil.updateCopies(book, -1);
 			           }
@@ -86,12 +84,12 @@ public class UserCheckout extends HttpServlet {
 				   out.print("Sorry could not update due either because user does not exist "
 				   		+ "or because the user has books already checked out "
 				   		+ "or there are no more avaible copies for a book");  
-			        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
+			        RequestDispatcher rd=request.getRequestDispatcher("Home.html");  
 			        rd.include(request,response);
 			   }else {
 				   
 				   out.print("updated, user checked out!");  
-				        RequestDispatcher rd=request.getRequestDispatcher("user_Checkout.html");  
+				        RequestDispatcher rd=request.getRequestDispatcher("Home.html");  
 				        rd.include(request,response);
 			   }
 		   }
