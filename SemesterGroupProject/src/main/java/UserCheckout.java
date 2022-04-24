@@ -41,7 +41,7 @@ public class UserCheckout extends HttpServlet {
 		   String ISBN3 = request.getParameter("isbn3");
 		   String ISBN4 = request.getParameter("isbn4");
 		   String ISBN5 = request.getParameter("isbn5");
-           Integer userID = Integer.getInteger(keyUserID);
+           Integer userID = Integer.valueOf(keyUserID);
            boolean updated = false;
            String keyBooks = "";
            String Books [] = new String [5];
@@ -72,6 +72,9 @@ public class UserCheckout extends HttpServlet {
            }
 		   if(keyNewUser != null) {
 			   UserUtil.createUser(keyNewUser, keyBooks);
+			   for (String book : arr1) { 
+		            BookUtil.updateCopies(book, -1);
+		           }
 		   }
 		   else if(keyUserID != null) {
 			   if(avaibleCopies) {
