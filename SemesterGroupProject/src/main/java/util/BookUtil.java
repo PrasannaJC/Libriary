@@ -120,7 +120,7 @@ public class BookUtil {
 
 		      try {
 		         tx = session.beginTransaction();
-		         List<?> bks = session.createQuery("FROM book").list();
+		         List<?> bks = session.createQuery("FROM Book").list();
 		         for (Iterator<?> iterator = bks.iterator(); iterator.hasNext();) 
 		         {
 		        	 Book b = (Book) iterator.next();
@@ -144,14 +144,16 @@ public class BookUtil {
 
 		      try {
 		         tx = session.beginTransaction();
-		         List<?> bks = session.createQuery("FROM book").list();
+		         List<?> bks = session.createQuery("FROM Book").list();
 		         for (Iterator<?> iterator = bks.iterator(); iterator.hasNext();) 
 		         {
 		        	 Book b = (Book) iterator.next();
 		        	 if (b.getISBN13().equals(isbn) && b.getCopies() >= 0)
 		        	 {
 		        		 b.setCopies(b.getCopies() + updateCopiesNumber);
-		        		 session.save(b);
+		        		 session.update(b);
+		        		 tx.commit();
+				         session.close();
 		        	 }
 		         }
 		      } catch (HibernateException e) {
@@ -159,6 +161,7 @@ public class BookUtil {
 		            tx.rollback();
 		         e.printStackTrace();
 		      } finally {
+		    	 tx.commit();
 		         session.close();
 		      }
 	   }
