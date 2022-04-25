@@ -83,7 +83,6 @@ public class SearchBook extends HttpServlet {
 	        		 + b.getISBN13() + ", " //
 	        		 + b.getCategory() + ", " //
 	        		 + b.getCopies() + ", " //
-	        		 + b.getDescription() + ", " //
 	        		 + b.getPublicationYear());
 
 	         out.println("<li>" + b.getTitle() + ", " //
@@ -91,7 +90,6 @@ public class SearchBook extends HttpServlet {
 	        		 + b.getISBN13() + ", " //
 	        		 + b.getCategory() + ", " //
 	        		 + b.getCopies() + ", " //
-	        		 + b.getDescription() + ", " //
 	        		 + b.getPublicationYear() + "</li>");
 	      }
 	   }
