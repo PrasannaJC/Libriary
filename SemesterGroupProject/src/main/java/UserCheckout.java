@@ -41,7 +41,10 @@ public class UserCheckout extends HttpServlet {
 		   String ISBN3 = request.getParameter("isbn3");
 		   String ISBN4 = request.getParameter("isbn4");
 		   String ISBN5 = request.getParameter("isbn5");
-           Integer userID = Integer.valueOf(keyUserID);
+		   Integer userID = null;
+		   if(keyUserID != null ) {
+			   userID = Integer.valueOf(keyUserID);
+		   }
            boolean updated = false;
            String keyBooks = "";
            String Books [] = new String [5];
