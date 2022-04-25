@@ -99,12 +99,12 @@ public class BookUtil {
 	      return resultList;
 	   }
 
-	   public static void createBook(String title, String author, String isbn13, String category, Integer copies, String description, Integer publicationyear) {
+	   public static void createBook(String title, String author, String isbn13, String category, Integer copies, Integer publicationyear) {
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try {
 	         tx = session.beginTransaction();
-	         session.save(new Book(title, author, isbn13, category, copies, description, publicationyear));
+	         session.save(new Book(title, author, isbn13, category, copies, publicationyear));
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx != null)

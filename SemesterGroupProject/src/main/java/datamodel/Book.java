@@ -38,24 +38,11 @@ public class Book {
    
    @Column(name = "COPIES")
    private Integer copies;
-
-   @Column(name = "DESCRIPTION")
-   private String description;
    
    @Column(name = "PublicationYear")
    private Integer publicationyear;
    
    public Book() {
-   }
-
-   public Book(String title, String author, String isbn13, String category, Integer copies, String description, Integer publicationyear) {
-      this.title = title;
-      this.author = author;
-      this.isbn13 = isbn13;
-      this.category = category;
-      this.copies = copies;
-      this.description = description;
-      this.publicationyear = publicationyear;
    }
 
    public Book(String title, String author, String isbn13, String category, Integer copies, Integer publicationyear) {
@@ -108,14 +95,6 @@ public class Book {
 	   this.copies = copies;
    }
    
-   public String getDescription() {
-	   return description;
-   }
-   
-   public void setDescription(String description) {
-	   this.description = description;
-   }
-   
    public Integer getPublicationYear() {
 	   return publicationyear;
    }
@@ -126,6 +105,6 @@ public class Book {
    
    @Override
    public String toString() {
-      return "Book: " + this.title + ", " + this.author + ", " + this.isbn13 + ", " + this.category + ", " + this.copies + ", " + this.description + ", " + this.publicationyear;
+      return "Book: " + this.title + ", " + this.author + ", " + this.isbn13 + ", " + this.category + ", " + this.copies + ", " + this.publicationyear;
    }
 }
