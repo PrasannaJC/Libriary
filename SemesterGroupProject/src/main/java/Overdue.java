@@ -28,7 +28,7 @@ public class Overdue extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String submit = request.getParameter("check");	
-		int x = Integer.parseInt(submit);
+		//int x = Integer.parseInt(submit);
 
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
@@ -41,7 +41,8 @@ public class Overdue extends HttpServlet {
 	        "<h1 align=\"center\">" + title + "</h1>\n");
 	    //out.println("<ul>");
 	
-		if (x == 1)
+		//if (x == 1)
+	    if (submit.contains("Search Overdue"))
 		{
 		    List<User> u = null;
 

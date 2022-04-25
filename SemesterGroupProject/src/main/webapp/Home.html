@@ -65,6 +65,40 @@ button:hover
 	background-color:#b5a965;
 	color: black;
 }
+input[type=submit]
+{   
+    border:2px solid #b5a965;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    
+    background-color: #451919;
+  	color: #b5a965;
+  
+  	margin: 4px 2px;
+  	padding: 6px 6px;
+  
+  	text-align: center;
+  	text-decoration: none;
+  	font-size: 100%;
+  
+  	display: inline-block;
+  	cursor: pointer;
+  
+  	min-width: 75px;
+  	max-width: 250px;
+ 	width: 100%;
+  
+  	min-height: 25px;
+  	max-height: 100px;
+  	height: 100%;
+  
+  	position: static;
+}
+input[type=submit]:hover
+{
+    background: #b5a965;
+    color: black;
+}
 .outerBox
 {
 	max-width: 1920px;
@@ -164,7 +198,7 @@ button:hover
 		<a href="/SemesterGroupProject/User_Search.html"> <Button> Search Users </Button> </a> <br />
 		
 		<form action="Overdue" method="POST">
-		<a href="/SemesterGroupProject/Overdue.java"><input type="submit" name="check" value="1" /> <Button> Search Overdue </Button> </a> <br />
+		<input type="submit" name="check" value="Search Overdue" /> <br />
 		</form>
 		</div>	
 	</section>
