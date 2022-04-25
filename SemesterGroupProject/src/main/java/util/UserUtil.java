@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-
 import datamodel.User;
 
 import org.hibernate.HibernateException;
@@ -99,8 +98,6 @@ public class UserUtil {
 	
 	public static boolean checkUser(String userID)
 	{
-		//List<User> resultList = new ArrayList<User>();
-
 	      Session session = getSessionFactory().openSession();
 	      Transaction tx = null;
 	      Boolean out = false;
@@ -239,7 +236,7 @@ public class UserUtil {
 	{
 		//java.time.LocalDate checkout = date.toLocalDate();
 		java.time.LocalDate today = LocalDate.now();
-		System.out.println("=> " + today);
+		//System.out.println("=> " + today);
 		List<User> resultList = new ArrayList<User>();
 
 		Session session = getSessionFactory().openSession();
@@ -251,12 +248,19 @@ public class UserUtil {
 		   for (Iterator<?> iterator = usr.iterator(); iterator.hasNext();) 
 		   {
 		      User u = (User) iterator.next();
-		      System.out.println("=> " + u.getDue());
-		      due = u.getDue().toLocalDate();
+		      //System.out.println("=> " + u.getDue());
 		      
-		      if (due.compareTo(today) <= 0)
+		      if (u.getDue() == null)
 		      {
-		    	  resultList.add(u);
+		    	  System.out.println("=> User " + u.getUserID() + "hasn't checked out any books!");
+		      }
+		      else
+		      {
+		    	  due = u.getDue().toLocalDate();
+			      if (due.compareTo(today) <= 0)
+			      {
+			    	  resultList.add(u);
+			      }
 		      }
 		   }
 		   tx.commit();

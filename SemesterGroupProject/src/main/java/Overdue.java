@@ -15,9 +15,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Servlet implementation class Overdue
- */
 @WebServlet("/Overdue")
 public class Overdue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,9 +25,10 @@ public class Overdue extends HttpServlet {
         
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String submit = request.getParameter("check");	
+		int x = Integer.parseInt(submit);
 
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
@@ -41,16 +39,30 @@ public class Overdue extends HttpServlet {
 	        "<head><title>" + title + "</title></head>\n" + //
 	        "<body bgcolor=\"#f0f0f0\">\n" + //
 	        "<h1 align=\"center\">" + title + "</h1>\n");
-	    out.println("<ul>");
+	    //out.println("<ul>");
 	
-	    List<User> u = null;
+		if (x == 1)
+		{
+		    List<User> u = null;
 
-		u = UserUtil.overdue();
-		out.println("The following users have overdue books!!!");
-	    display(u, out);
+			u = UserUtil.overdue();
+			System.out.println("size of list => "+u.size());
+			if (u.size() == 0)
+			{
+				out.println("There are no users with overdue books!!!");
+			}
+			else
+			{
+				out.println("The following users have overdue books!!!");
+			    display(u, out);
+			}
+		}
+		else
+		{
+			out.println("Unknown Error...");
+		}
 	    out.println("</ul>");
 	    out.println("<a href=/" + Info.projectName + "/" + Info.homeWebName + ">Go Back to Home Page</a> <br>");
-	    //out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
 	    out.println("</body></html>");
 		
 	}
@@ -69,7 +81,6 @@ public class Overdue extends HttpServlet {
 	*/
 	void display(List<User> u, PrintWriter out) 
 	{
-	      
 		for (User x : u) {
 	         System.out.println("[DBG] " + x.getUserID() + ", " //
 	        		 + x.getUsername() + ", " //
@@ -86,13 +97,6 @@ public class Overdue extends HttpServlet {
 	        		 + x.getOverdue() + "</li>");
 	      }
 	}
-	
-	
-	public void process()
-	{
-		
-	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
