@@ -77,7 +77,12 @@ public class returnBooks extends HttpServlet
 			Books[2] = ISBN3;
 			Books[3] = ISBN4;
 			Books[4] = ISBN5;
-			Integer userID = Integer.valueOf(keyUserID);
+			Integer userID;
+			if(!keyUserID.equals("")) {
+			 userID = Integer.valueOf(keyUserID);
+			}else {
+				 userID = null;
+			}
 			   
 			for(String book: Books)
 			{
