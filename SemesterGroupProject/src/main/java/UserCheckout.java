@@ -43,7 +43,7 @@ public class UserCheckout extends HttpServlet
 		String ISBN5 = request.getParameter("isbn5");
 		Integer userID = null;
 		
-		if(keyUserID != null )
+		if(keyUserID != null && !keyUserID.equals(""))
 		{
 			userID = Integer.valueOf(keyUserID);
 		}
