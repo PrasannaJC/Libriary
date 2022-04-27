@@ -252,7 +252,7 @@ public class UserUtil
             {
             	User u = (User) iterator.next();
                 
-            	if (u.getUserID().equals(UserID))
+            	if (u.getUserID().equals(UserID) && u.getBooks() != null)
                 {
             		System.out.println(u.getBooks());
                 	String bookin[] = u.getBooks().split(", ");
