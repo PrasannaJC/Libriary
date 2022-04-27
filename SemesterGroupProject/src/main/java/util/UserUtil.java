@@ -162,7 +162,7 @@ public class UserUtil
 	    return out;
 	}
 	
-	public static void createUser(String userName, String books)
+	public static boolean createUser(String userName, String books)
 	{
 		Session session = getSessionFactory().openSession();
 	    Transaction tx = null;
@@ -178,6 +178,8 @@ public class UserUtil
 	        session.save(new User(userName, books, c, d));
 	         
 	         tx.commit();
+	         
+	         return true;
 	    }
 	    catch (HibernateException e)
 	    {
@@ -189,6 +191,8 @@ public class UserUtil
 	    {
 	         session.close();
 	    }
+	    
+	    return false;
 	}
 	
 	public static boolean updateUser(Integer UserID, String books)
