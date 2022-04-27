@@ -11,43 +11,40 @@ import datamodel.User;
 import util.UserUtil;
 import util.Info;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet("/Overdue")
-public class Overdue extends HttpServlet {
+public class Overdue extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
        
-
-    public Overdue() {
-        super();
-        
+    public Overdue()
+    {
+        super();       
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		String submit = request.getParameter("check");	
-		//int x = Integer.parseInt(submit);
 
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
-	    String title = "Overdue Result";
+	    String title = "Overdue Results";
 	    String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
 	    out.println(docType + //
 	        "<html>\n" + //
 	        "<head><title>" + title + "</title></head>\n" + //
-	        "<body bgcolor=\"#f0f0f0\">\n" + //
+	        "<body bgcolor=\"#b5a965\">\n" + //
 	        "<h1 align=\"center\">" + title + "</h1>\n");
-	    //out.println("<ul>");
+	    out.println("<ul>");
 	
-		//if (x == 1)
 	    if (submit.contains("Search Overdue"))
 		{
 		    List<User> u = null;
 
 			u = UserUtil.overdue();
 			System.out.println("size of list => "+u.size());
+			
 			if (u.size() == 0)
 			{
 				out.println("There are no users with overdue books!!!");
@@ -58,49 +55,36 @@ public class Overdue extends HttpServlet {
 			    display(u, out);
 			}
 		}
-		else
+	    else
 		{
 			out.println("Unknown Error...");
 		}
+	    
 	    out.println("</ul>");
 	    out.println("<a href=/" + Info.projectName + "/" + Info.homeWebName + ">Go Back to Home Page</a> <br>");
-	    out.println("</body></html>");
-		
+	    out.println("</body></html>");	
 	}
-	/*
-	public void overdue(java.sql.Date date)
-	{
-		java.time.LocalDate checkout = date.toLocalDate();
-		java.time.LocalDate today = LocalDate.now();
-		
-		int diff = checkout.compareTo(today);
-		if (diff > 14)
-		{
-			System.out.println("You have overdue books!!! Go return the existing ones before you checkout new ones!!!");
-		}
-	}
-	*/
+	
 	void display(List<User> u, PrintWriter out) 
 	{
-		for (User x : u) {
-	         System.out.println("[DBG] " + x.getUserID() + ", " //
-	        		 + x.getUsername() + ", " //
-	        		 + x.getBooks() + ", " //
-	        		 + x.getCheckout() + ", " //
-	        		 + x.getDue() + ", " //
-	        		 + x.getOverdue()); 
+		for (User x : u)
+		{
+			System.out.println("[DBG] " + x.getUserID() + ", " //
+					+ x.getUsername() + ", " //
+					+ x.getBooks() + ", " //
+					+ x.getCheckout() + ", " //
+					+ x.getDue() + "</li>"); 
 
-	         out.println("<li>" + x.getUserID() + ", " //
-	        		 + x.getUsername() + ", " //
-	        		 + x.getBooks() + ", " //
-	        		 + x.getCheckout() + ", " //
-	        		 + x.getDue() + ", " //
-	        		 + x.getOverdue() + "</li>");
-	      }
+			out.println("<li>" + x.getUserID() + ", " //
+					+ x.getUsername() + ", " //
+					+ x.getBooks() + ", " //
+					+ x.getCheckout() + ", " //
+					+ x.getDue() + "</li>");
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		doGet(request, response);
 	}
-
 }
