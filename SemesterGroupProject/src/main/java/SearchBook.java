@@ -65,7 +65,7 @@ public class SearchBook extends HttpServlet
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
 		out.println(docType + //
 				"<html>\n" + //
-				"<head><title>" + title + "</title></head>\n" + //
+				"<head><title>" + title + "</title></head>\n" + 
 				"<body bgcolor=\"#b5a965\">\n" + //
 				"<h1 align=\"center\">" + title + "</h1>\n");
 		out.println("<ul>");
